@@ -6,6 +6,7 @@ import java.util.*;
 public class WorldState {
     private HashMap<String, Object> variables;
     private HashMap<Type, List<Object>> typeList;
+    private boolean gameOver = false;
 
     <T> void addVariable(String name, T var) {
         if(typeList.containsKey(var.getClass())) {
@@ -17,10 +18,13 @@ public class WorldState {
         }
         variables.put(name, var);
     }
-    public List<Object> getVariablesOfType(Type t) {
-        return typeList.get(t);
+    public Object[] getVariablesOfType(Type t) {
+        return typeList.get(t).toArray();
     }
     public <T> void SetVariable(String name, T var) {
         throw new UnsupportedOperationException();
     }
+
+    public boolean isGameOver() { return gameOver; }
+    public void setGameOver() { this.gameOver = true; }
 }

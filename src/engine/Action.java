@@ -9,12 +9,10 @@ public abstract class Action {
     public abstract void postcondition();
     public abstract String description();
     public abstract String narrativeDescription();
-    public abstract Type[] argumentVariables();
-    public abstract Action create(Character character, WorldState state, List<Object> args);
     public final Character character;
     public final Location location;
     public final WorldState state;
-    public Action(Character character, Location location, WorldState state) {
+    protected Action(Character character, WorldState state) {
         this.character = character;
         this.location = character.getLocation();
         this.state = state;
