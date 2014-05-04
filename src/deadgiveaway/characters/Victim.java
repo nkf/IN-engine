@@ -13,6 +13,8 @@ public class Victim extends DGACharacter {
     private Scanner scanner = new Scanner(System.in);
     private boolean playerControl;
 
+    public boolean isBeingKilled = false;
+
     private static List<Victim> victims = new ArrayList<Victim>();
     public static Victim player;
 

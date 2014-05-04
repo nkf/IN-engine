@@ -1,6 +1,5 @@
 package deadgiveaway.actions;
 
-
 import deadgiveaway.characters.DGACharacter;
 import engine.*;
 import engine.Character;
@@ -23,23 +22,24 @@ public class MurderPerson extends Action {
 
     @Override
     public void postcondition() {
-        Victim victim = (Victim) target;
-        victim.setActive(false);
-        Victim v = Victim.getActiveNonPlayer();
-        if(v != null) v.setPlayerControlled();
-        else state.setGameOver();
+        Murderer murderer = (Murderer)character;
+        murderer.murderInProgress = true;
+        murderer.setBusy(true);
+        Victim victim = (Victim)target;
+        victim.isBeingKilled = true;
+        victim.setBusy(true);
     }
 
     @Override
     public String description() {
-        return "Kill " + target + " in cold blood";
+        return "Attempt to kill " + target;
     }
 
     @Override
     public String narrativeDescription() {
-        return target.Name + " is brutally murdered by " + character.Name;
+        return character.Name + " starts murdering " + target.Name + " in front of your very eyes";
     }
-    private MurderPerson(engine.Character c, WorldState s, Character target) {
+    private MurderPerson(Character c, WorldState s, Character target) {
         super(c, s);
         this.target = (DGACharacter)target;
     }
@@ -47,7 +47,7 @@ public class MurderPerson extends Action {
     public static final MurderPersonFactory factory = new MurderPersonFactory();
     public static class MurderPersonFactory implements ActionFactory {
         @Override
-        public Action create(engine.Character character, WorldState state, List<Object> args) {
+        public Action create(Character character, WorldState state, List<Object> args) {
             return new MurderPerson(character, state, (Character)args.get(0));
         }
         @Override

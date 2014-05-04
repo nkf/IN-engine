@@ -27,23 +27,19 @@ public class Engine {
     }
     /**
      * Illustration of what this method should return.
-     * [ c1 , c2 , pov , c4 , c1 , c2 , pov, c4 ]
-     *                 |-----recap----|  |
-     *                               firstPass
+     * [ c1 , c2 , pov , c4 , c1 , c2 , now ]
+     *              |  |-----recap----|
+     *           lastTurn
      */
-    public List<Action> turnRecap(Character pov) {
+    public List<Action> previousTurnRecap(Character pov) {
         int turnIndex = history.size()-1;
-        int firstPass = -1;
         while(turnIndex > 0) {
-            if(history.get(turnIndex).character == pov){
-                if(firstPass > 0) break;
-                else firstPass = turnIndex;
-            }
+            if(history.get(turnIndex).character == pov) break;
             turnIndex--;
         }
         List<Action> recap = new ArrayList<Action>();
         if(turnIndex < 0) return recap;
-        for (; turnIndex < firstPass; turnIndex++) {
+        for (; turnIndex < history.size(); turnIndex++) {
             Action a = history.get(turnIndex);
             if(a.locations.contains(pov.getLocation()) && a.character != pov) {
                 recap.add(a);
@@ -58,9 +54,9 @@ public class Engine {
     public void removeTurnListener(TurnEvent e) {
         listeners.remove(e);
     }
-    private void turnPassedEvent() {
+    private void turnStartedEvent(Character character) {
         for (TurnEvent e : listeners) {
-            e.TurnPassed();
+            e.TurnStarted(character);
         }
     }
 
@@ -68,6 +64,7 @@ public class Engine {
         while(!worldState.isGameOver()) {
             for (Character character : characters) {
                 if(!character.isActive()) continue;
+                turnStartedEvent(character);
                 List<Action> actions = getAvailableActions(character);
                 actions = filterByPrecondition(actions);
                 Action selection = character.selectAction(actions);
@@ -75,8 +72,6 @@ public class Engine {
                 history.add(selection);
             }
             turn++;
-            turnPassedEvent();
-            if(turn > 10) worldState.setGameOver();
         }
     }
 
@@ -107,7 +102,7 @@ public class Engine {
     private List<List<Object>> getVariableCombinations(Type[] varTypes, Location loc) {
         Object[][] varLists = new Object[varTypes.length][];
         for (int i = 0; i < varTypes.length; i++) {
-            if     (varTypes[i].equals(Character.class))    varLists[i] = characters;
+            if     (varTypes[i].equals(Character.class))    varLists[i] = activeCharacters();
             else if(varTypes[i].equals(Location.class))     varLists[i] = connections.get(loc);
             else                                            varLists[i] = worldState.getVariablesOfType(varTypes[i]);
         }
@@ -126,6 +121,14 @@ public class Engine {
             res.add(wrap);
         }
         return res;
+    }
+
+    private Character[] activeCharacters() {
+        ArrayList<Character> actives = new ArrayList<Character>();
+        for (int i = 0; i < characters.length; i++) {
+            if(characters[i].isActive()) actives.add(characters[i]);
+        }
+        return actives.toArray(new Character[actives.size()]);
     }
 
 }

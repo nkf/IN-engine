@@ -1,14 +1,10 @@
+import deadgiveaway.actions.*;
 import deadgiveaway.location.House;
 import engine.*;
 import engine.Character;
-import deadgiveaway.actions.EatDinner;
-import deadgiveaway.actions.EatShitAndDie;
-import deadgiveaway.actions.GoToRoom;
-import deadgiveaway.actions.MurderPerson;
 import deadgiveaway.characters.Murderer;
 import deadgiveaway.characters.Victim;
 
-import java.util.HashMap;
 import java.util.List;
 
 public class Main {
@@ -26,20 +22,24 @@ public class Main {
 
         //Define action actions
         ActionFactory[] actions = new ActionFactory[] {
-            GoToRoom.factory,
-            EatDinner.factory,
-            EatShitAndDie.factory,
-            MurderPerson.factory
+                GoToRoom.factory,
+                EatDinner.factory,
+                EatShitAndDie.factory,
+                MurderPerson.factory,
+                ContinueMurder.factory,
+                ContinueDying.factory,
+                RevealMurderer.factory
         };
 
-        //Define initial worldstate ???
+        //Define initial worldstate
         WorldState worldState = new WorldState();
 
         //Fire up the engine
         final Engine game = new Engine(characters, House.connections, actions, worldState);
         game.addTurnListener(new TurnEvent() {
-            public void TurnPassed() {
-                List<Action> recap = game.turnRecap(Victim.player);
+            public void TurnStarted(Character character) {
+                if(character != Victim.player) return;
+                List<Action> recap = game.previousTurnRecap(Victim.player);
                 for(Action a : recap) {
                     System.out.println(a.narrativeDescription());
                 }

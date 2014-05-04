@@ -8,7 +8,7 @@ public class WorldState {
     private HashMap<Type, List<Object>> typeList;
     private boolean gameOver = false;
 
-    <T> void addVariable(String name, T var) {
+    public <T> void addVariable(String name, T var) {
         if(typeList.containsKey(var.getClass())) {
             typeList.get(var.getClass()).add(var);
         } else {

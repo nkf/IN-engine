@@ -2,5 +2,5 @@ package engine;
 
 
 public interface TurnEvent {
-    void TurnPassed();
+    void TurnStarted(Character character);
 }
