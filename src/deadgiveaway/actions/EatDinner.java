@@ -1,6 +1,7 @@
 package deadgiveaway.actions;
 
 import deadgiveaway.characters.DGACharacter;
+import deadgiveaway.location.House;
 import engine.*;
 import engine.Character;
 
@@ -10,7 +11,7 @@ import java.util.List;
 public class EatDinner extends Action{
     @Override
     public boolean precondition() {
-        return location.Name.equals("the dinner room")
+        return location == House.dinnerRoom
             && !((DGACharacter)character).isBusy();
     }
 

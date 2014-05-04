@@ -1,3 +1,4 @@
+import deadgiveaway.location.House;
 import engine.*;
 import engine.Character;
 import deadgiveaway.actions.EatDinner;
@@ -13,23 +14,14 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        //Define locations
-        Location dinnerRoom = new Location("the dinner room");
-        Location toilet = new Location("the toilet");
-        Location bedroom = new Location("the bedroom");
-
-        //Define connections between locations
-        HashMap<Location, Location[]> connections = new HashMap<Location, Location[]>();
-        connections.put(dinnerRoom, new Location[]{ toilet, bedroom });
-        connections.put(toilet, new Location[]{ dinnerRoom });
-        connections.put(bedroom, new Location[]{ dinnerRoom });
+        //See house class for location definitions.
 
         //Define characters
         Character[] characters = new Character[] {
-                new Victim("Lisa", dinnerRoom, false),
-                new Victim("Peter", dinnerRoom, false),
-                new Victim("Jack", dinnerRoom, true),
-                new Murderer("Mike", dinnerRoom)
+                new Victim("Lisa", House.dinnerRoom, false),
+                new Victim("Peter", House.dinnerRoom, false),
+                new Victim("Jack", House.dinnerRoom, true),
+                new Murderer("Mike", House.dinnerRoom)
         };
 
         //Define action actions
@@ -44,7 +36,7 @@ public class Main {
         WorldState worldState = new WorldState();
 
         //Fire up the engine
-        final Engine game = new Engine(characters, connections, actions, worldState);
+        final Engine game = new Engine(characters, House.connections, actions, worldState);
         game.addTurnListener(new TurnEvent() {
             public void TurnPassed() {
                 List<Action> recap = game.turnRecap(Victim.player);

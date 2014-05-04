@@ -1,6 +1,7 @@
 package deadgiveaway.actions;
 
 import deadgiveaway.characters.DGACharacter;
+import deadgiveaway.location.House;
 import engine.Action;
 import engine.ActionFactory;
 import engine.Character;
@@ -13,7 +14,7 @@ import java.util.List;
 public class EatShitAndDie extends Action {
     @Override
     public boolean precondition() {
-        return location.Name.equals("the toilet")
+        return location == House.toilet
             && character == Victim.player
             && !((DGACharacter)character).isBusy();
     }
