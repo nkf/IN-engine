@@ -1,4 +1,4 @@
-package game.ai;
+package deadgiveaway.ai;
 
 import java.util.Random;
 

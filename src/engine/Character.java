@@ -4,6 +4,7 @@ import java.util.List;
 public abstract class Character {
     public abstract Action selectAction(List<Action> actions);
     private Location currentLocation;
+    private boolean active = true;
     public final String Name;
     public Location getLocation() {
         return currentLocation;
@@ -19,5 +20,13 @@ public abstract class Character {
     @Override
     public String toString() {
         return Name +" @ "+ currentLocation;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

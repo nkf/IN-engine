@@ -25,18 +25,29 @@ public class Engine {
         this.actionTemplates = actionTemplates;
         history = new ArrayList<Action>();
     }
-
+    /**
+     * Illustration of what this method should return.
+     * [ c1 , c2 , pov , c4 , c1 , c2 , pov, c4 ]
+     *                 |-----recap----|  |
+     *                               firstPass
+     */
     public List<Action> turnRecap(Character pov) {
         int turnIndex = history.size()-1;
+        int firstPass = -1;
         while(turnIndex > 0) {
-            if(history.get(turnIndex).character == pov && turnIndex != history.size()-1)
-                break;
+            if(history.get(turnIndex).character == pov){
+                if(firstPass > 0) break;
+                else firstPass = turnIndex;
+            }
             turnIndex--;
         }
         List<Action> recap = new ArrayList<Action>();
-        for (; turnIndex < history.size(); turnIndex++) {
+        if(turnIndex < 0) return recap;
+        for (; turnIndex < firstPass; turnIndex++) {
             Action a = history.get(turnIndex);
-            if(a.location == pov.getLocation()) recap.add(a);
+            if(a.locations.contains(pov.getLocation()) && a.character != pov) {
+                recap.add(a);
+            }
         }
         return recap;
     }
@@ -56,6 +67,7 @@ public class Engine {
     public void start() {
         while(!worldState.isGameOver()) {
             for (Character character : characters) {
+                if(!character.isActive()) continue;
                 List<Action> actions = getAvailableActions(character);
                 actions = filterByPrecondition(actions);
                 Action selection = character.selectAction(actions);

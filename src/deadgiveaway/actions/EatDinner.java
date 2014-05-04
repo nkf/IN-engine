@@ -1,5 +1,6 @@
-package game.actions;
+package deadgiveaway.actions;
 
+import deadgiveaway.characters.DGACharacter;
 import engine.*;
 import engine.Character;
 
@@ -9,7 +10,8 @@ import java.util.List;
 public class EatDinner extends Action{
     @Override
     public boolean precondition() {
-        return location.Name.equals("the dinner room");
+        return location.Name.equals("the dinner room")
+            && !((DGACharacter)character).isBusy();
     }
 
     @Override

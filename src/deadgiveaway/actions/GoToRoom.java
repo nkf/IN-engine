@@ -1,5 +1,6 @@
-package game.actions;
+package deadgiveaway.actions;
 
+import deadgiveaway.characters.DGACharacter;
 import engine.*;
 import engine.Character;
 
@@ -11,7 +12,7 @@ public class GoToRoom extends Action{
 
     @Override
     public boolean precondition() {
-        return true;
+        return !((DGACharacter)character).isBusy();
     }
 
     @Override
@@ -26,11 +27,12 @@ public class GoToRoom extends Action{
 
     @Override
     public String narrativeDescription() {
-        return character.Name + " walks into " + room.Name;
+        return character.Name + " walks from " + location + " into " + room;
     }
     private GoToRoom(Character c, WorldState s, Location room) {
         super(c, s);
         this.room = room;
+        locations.add(room);
     }
 
     public static final GoToRoomFactory factory = new GoToRoomFactory();
@@ -47,6 +49,6 @@ public class GoToRoom extends Action{
 
     @Override
     public String toString() {
-        return character.Name + " ~ " + location.Name + " -> " + room.Name;
+        return character.Name + " ~ " + locations.get(0) + " -> " + room;
     }
 }

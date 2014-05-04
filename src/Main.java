@@ -1,9 +1,11 @@
 import engine.*;
 import engine.Character;
-import game.actions.EatDinner;
-import game.actions.GoToRoom;
-import game.characters.NPC;
-import game.characters.Player;
+import deadgiveaway.actions.EatDinner;
+import deadgiveaway.actions.EatShitAndDie;
+import deadgiveaway.actions.GoToRoom;
+import deadgiveaway.actions.MurderPerson;
+import deadgiveaway.characters.Murderer;
+import deadgiveaway.characters.Victim;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,17 +25,19 @@ public class Main {
         connections.put(bedroom, new Location[]{ dinnerRoom });
 
         //Define characters
-        final Character player = new Player("Jack", dinnerRoom);
         Character[] characters = new Character[] {
-                new NPC("Lisa", dinnerRoom),
-                new NPC("Peter", dinnerRoom),
-                player
+                new Victim("Lisa", dinnerRoom, false),
+                new Victim("Peter", dinnerRoom, false),
+                new Victim("Jack", dinnerRoom, true),
+                new Murderer("Mike", dinnerRoom)
         };
 
         //Define action actions
         ActionFactory[] actions = new ActionFactory[] {
             GoToRoom.factory,
-            EatDinner.factory
+            EatDinner.factory,
+            EatShitAndDie.factory,
+            MurderPerson.factory
         };
 
         //Define initial worldstate ???
@@ -43,7 +47,7 @@ public class Main {
         final Engine game = new Engine(characters, connections, actions, worldState);
         game.addTurnListener(new TurnEvent() {
             public void TurnPassed() {
-                List<Action> recap = game.turnRecap(player);
+                List<Action> recap = game.turnRecap(Victim.player);
                 for(Action a : recap) {
                     System.out.println(a.narrativeDescription());
                 }
