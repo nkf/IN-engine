@@ -1,7 +1,7 @@
 import deadgiveaway.actions.*;
 import deadgiveaway.location.House;
 import engine.*;
-import engine.Character;
+import engine.Actor;
 import deadgiveaway.characters.Murderer;
 import deadgiveaway.characters.Victim;
 
@@ -13,7 +13,7 @@ public class Main {
         //See house class for location definitions.
 
         //Define characters
-        Character[] characters = new Character[] {
+        Actor[] actors = new Actor[] {
                 new Victim("Lisa", House.dinnerRoom, false),
                 new Victim("Peter", House.dinnerRoom, false),
                 new Victim("Jack", House.dinnerRoom, true),
@@ -35,10 +35,10 @@ public class Main {
         WorldState worldState = new WorldState();
 
         //Fire up the engine
-        final Engine game = new Engine(characters, House.connections, actions, worldState);
+        final Engine game = new Engine(actors, House.connections, actions, worldState);
         game.addTurnListener(new TurnEvent() {
-            public void TurnStarted(Character character) {
-                if(character != Victim.player) return;
+            public void TurnStarted(Actor actor) {
+                if(actor != Victim.player) return;
                 List<Action> recap = game.previousTurnRecap(Victim.player);
                 for(Action a : recap) {
                     System.out.println(a.narrativeDescription());

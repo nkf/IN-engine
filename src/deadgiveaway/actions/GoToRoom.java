@@ -2,7 +2,7 @@ package deadgiveaway.actions;
 
 import deadgiveaway.characters.DGACharacter;
 import engine.*;
-import engine.Character;
+import engine.Actor;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -12,12 +12,12 @@ public class GoToRoom extends Action{
 
     @Override
     public boolean precondition() {
-        return !((DGACharacter)character).isBusy();
+        return !((DGACharacter) actor).isBusy();
     }
 
     @Override
     public void postcondition() {
-        character.setLocation(room);
+        actor.setLocation(room);
     }
 
     @Override
@@ -27,9 +27,9 @@ public class GoToRoom extends Action{
 
     @Override
     public String narrativeDescription() {
-        return character.Name + " walks from " + location + " into " + room;
+        return actor.Name + " walks from " + location + " into " + room;
     }
-    private GoToRoom(Character c, WorldState s, Location room) {
+    private GoToRoom(Actor c, WorldState s, Location room) {
         super(c, s);
         this.room = room;
         locations.add(room);
@@ -38,8 +38,8 @@ public class GoToRoom extends Action{
     public static final GoToRoomFactory factory = new GoToRoomFactory();
     public static class GoToRoomFactory implements ActionFactory {
         @Override
-        public Action create(Character character, WorldState state, List<Object> args) {
-            return new GoToRoom(character, state, (Location)args.get(0));
+        public Action create(Actor actor, WorldState state, List<Object> args) {
+            return new GoToRoom(actor, state, (Location)args.get(0));
         }
         @Override
         public Type[] argumentVariables() {
@@ -49,6 +49,6 @@ public class GoToRoom extends Action{
 
     @Override
     public String toString() {
-        return character.Name + " ~ " + locations.get(0) + " -> " + room;
+        return actor.Name + " ~ " + locations.get(0) + " -> " + room;
     }
 }

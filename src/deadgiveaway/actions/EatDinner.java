@@ -3,7 +3,7 @@ package deadgiveaway.actions;
 import deadgiveaway.characters.DGACharacter;
 import deadgiveaway.location.House;
 import engine.*;
-import engine.Character;
+import engine.Actor;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -12,7 +12,7 @@ public class EatDinner extends Action{
     @Override
     public boolean precondition() {
         return location == House.dinnerRoom
-            && !((DGACharacter)character).isBusy();
+            && !((DGACharacter) actor).isBusy();
     }
 
     @Override
@@ -27,17 +27,17 @@ public class EatDinner extends Action{
 
     @Override
     public String narrativeDescription() {
-        return character.Name + " eats a bit of dinner at the table";
+        return actor.Name + " eats a bit of dinner at the table";
     }
-    private EatDinner(Character c, WorldState s) {
+    private EatDinner(Actor c, WorldState s) {
         super(c, s);
     }
 
     public static final EatDinnerFactory factory = new EatDinnerFactory();
     public static class EatDinnerFactory implements ActionFactory {
         @Override
-        public Action create(Character character, WorldState state, List<Object> args) {
-            return new EatDinner(character, state);
+        public Action create(Actor actor, WorldState state, List<Object> args) {
+            return new EatDinner(actor, state);
         }
         @Override
         public Type[] argumentVariables() {

@@ -2,7 +2,7 @@ package deadgiveaway.actions;
 
 import deadgiveaway.characters.DGACharacter;
 import engine.*;
-import engine.Character;
+import engine.Actor;
 import deadgiveaway.characters.Murderer;
 import deadgiveaway.characters.Victim;
 
@@ -14,15 +14,15 @@ public class MurderPerson extends Action {
 
     @Override
     public boolean precondition() {
-        return character instanceof Murderer
+        return actor instanceof Murderer
             && target instanceof Victim
             && target.getLocation() == location
-            && !((DGACharacter)character).isBusy();
+            && !((DGACharacter) actor).isBusy();
     }
 
     @Override
     public void postcondition() {
-        Murderer murderer = (Murderer)character;
+        Murderer murderer = (Murderer) actor;
         murderer.murderInProgress = true;
         murderer.setBusy(true);
         Victim victim = (Victim)target;
@@ -37,9 +37,9 @@ public class MurderPerson extends Action {
 
     @Override
     public String narrativeDescription() {
-        return character.Name + " starts murdering " + target.Name + " in front of your very eyes";
+        return actor.Name + " starts murdering " + target.Name + " in front of your very eyes";
     }
-    private MurderPerson(Character c, WorldState s, Character target) {
+    private MurderPerson(Actor c, WorldState s, Actor target) {
         super(c, s);
         this.target = (DGACharacter)target;
     }
@@ -47,12 +47,12 @@ public class MurderPerson extends Action {
     public static final MurderPersonFactory factory = new MurderPersonFactory();
     public static class MurderPersonFactory implements ActionFactory {
         @Override
-        public Action create(Character character, WorldState state, List<Object> args) {
-            return new MurderPerson(character, state, (Character)args.get(0));
+        public Action create(Actor actor, WorldState state, List<Object> args) {
+            return new MurderPerson(actor, state, (Actor)args.get(0));
         }
         @Override
         public Type[] argumentVariables() {
-            return new Type[]{ Character.class };
+            return new Type[]{ Actor.class };
         }
     }
 

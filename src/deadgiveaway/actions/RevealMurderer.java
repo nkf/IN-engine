@@ -3,9 +3,8 @@ package deadgiveaway.actions;
 import deadgiveaway.characters.DGACharacter;
 import deadgiveaway.characters.Murderer;
 import deadgiveaway.characters.Victim;
-import deadgiveaway.location.House;
 import engine.*;
-import engine.Character;
+import engine.Actor;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -17,7 +16,7 @@ public class RevealMurderer extends Action{
         return accused instanceof Murderer
             && accused.getLocation() == location
             && ((Murderer)accused).murderInProgress
-            && character == Victim.player;
+            && actor == Victim.player;
     }
 
     @Override
@@ -32,9 +31,9 @@ public class RevealMurderer extends Action{
 
     @Override
     public String narrativeDescription() {
-        return character.Name + " reveals that the murderer is " + accused.Name + "!";
+        return actor.Name + " reveals that the murderer is " + accused.Name + "!";
     }
-    private RevealMurderer(Character c, WorldState s, DGACharacter accused) {
+    private RevealMurderer(Actor c, WorldState s, DGACharacter accused) {
         super(c, s);
         this.accused = accused;
     }
@@ -42,12 +41,12 @@ public class RevealMurderer extends Action{
     public static final RevealMurdererFactory factory = new RevealMurdererFactory();
     public static class RevealMurdererFactory implements ActionFactory {
         @Override
-        public Action create(Character character, WorldState state, List<Object> args) {
-            return new RevealMurderer(character, state, (DGACharacter)args.get(0));
+        public Action create(Actor actor, WorldState state, List<Object> args) {
+            return new RevealMurderer(actor, state, (DGACharacter)args.get(0));
         }
         @Override
         public Type[] argumentVariables() {
-            return new Type[]{ Character.class };
+            return new Type[]{ Actor.class };
         }
     }
 

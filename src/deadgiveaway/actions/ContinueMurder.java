@@ -2,7 +2,7 @@ package deadgiveaway.actions;
 
 import deadgiveaway.characters.DGACharacter;
 import engine.*;
-import engine.Character;
+import engine.Actor;
 import deadgiveaway.characters.Murderer;
 import deadgiveaway.characters.Victim;
 
@@ -14,10 +14,10 @@ public class ContinueMurder extends Action {
 
     @Override
     public boolean precondition() {
-        return character instanceof Murderer
+        return actor instanceof Murderer
             && target instanceof Victim
             && ((Victim)target).isBeingKilled
-            && ((Murderer)character).murderInProgress;
+            && ((Murderer) actor).murderInProgress;
     }
 
     @Override
@@ -27,7 +27,7 @@ public class ContinueMurder extends Action {
         victim.setActive(false);
         victim.setBusy(false);
 
-        Murderer murderer = (Murderer) character;
+        Murderer murderer = (Murderer) actor;
         murderer.murderInProgress = false;
         murderer.setBusy(false);
 
@@ -48,9 +48,9 @@ public class ContinueMurder extends Action {
 
     @Override
     public String narrativeDescription() {
-        return character.Name + " stands above the body of " + target.Name + " with a weapon in hand";
+        return actor.Name + " stands above the body of " + target.Name + " with a weapon in hand";
     }
-    private ContinueMurder(Character c, WorldState s, Character target) {
+    private ContinueMurder(Actor c, WorldState s, Actor target) {
         super(c, s);
         this.target = (DGACharacter)target;
     }
@@ -58,12 +58,12 @@ public class ContinueMurder extends Action {
     public static final ContinueMurderFactory factory = new ContinueMurderFactory();
     public static class ContinueMurderFactory implements ActionFactory {
         @Override
-        public Action create(Character character, WorldState state, List<Object> args) {
-            return new ContinueMurder(character, state, (Character)args.get(0));
+        public Action create(Actor actor, WorldState state, List<Object> args) {
+            return new ContinueMurder(actor, state, (Actor)args.get(0));
         }
         @Override
         public Type[] argumentVariables() {
-            return new Type[]{ Character.class };
+            return new Type[]{ Actor.class };
         }
     }
 

@@ -7,7 +7,7 @@ import java.util.*;
 
 public class Engine {
 
-    private Character[] characters;
+    private Actor[] actors;
     private WorldState worldState;
     private Set<Location> locations;
     private HashMap<Location,Location[]> connections;
@@ -17,8 +17,8 @@ public class Engine {
     private int turn = 0;
     private List<TurnEvent> listeners = new ArrayList<TurnEvent>();
 
-    public Engine(Character[] characters, HashMap<Location, Location[]> connections, ActionFactory[] actionTemplates, WorldState initialState) {
-        this.characters = characters;
+    public Engine(Actor[] actors, HashMap<Location, Location[]> connections, ActionFactory[] actionTemplates, WorldState initialState) {
+        this.actors = actors;
         worldState = initialState;
         this.connections = connections;
         locations = connections.keySet();
@@ -31,17 +31,17 @@ public class Engine {
      *              |  |-----recap----|
      *           lastTurn
      */
-    public List<Action> previousTurnRecap(Character pov) {
+    public List<Action> previousTurnRecap(Actor pov) {
         int turnIndex = history.size()-1;
         while(turnIndex > 0) {
-            if(history.get(turnIndex).character == pov) break;
+            if(history.get(turnIndex).actor == pov) break;
             turnIndex--;
         }
         List<Action> recap = new ArrayList<Action>();
         if(turnIndex < 0) return recap;
         for (; turnIndex < history.size(); turnIndex++) {
             Action a = history.get(turnIndex);
-            if(a.locations.contains(pov.getLocation()) && a.character != pov) {
+            if(a.locations.contains(pov.getLocation()) && a.actor != pov) {
                 recap.add(a);
             }
         }
@@ -54,20 +54,20 @@ public class Engine {
     public void removeTurnListener(TurnEvent e) {
         listeners.remove(e);
     }
-    private void turnStartedEvent(Character character) {
+    private void turnStartedEvent(Actor actor) {
         for (TurnEvent e : listeners) {
-            e.TurnStarted(character);
+            e.TurnStarted(actor);
         }
     }
 
     public void start() {
         while(!worldState.isGameOver()) {
-            for (Character character : characters) {
-                if(!character.isActive()) continue;
-                turnStartedEvent(character);
-                List<Action> actions = getAvailableActions(character);
+            for (Actor actor : actors) {
+                if(!actor.isActive()) continue;
+                turnStartedEvent(actor);
+                List<Action> actions = getAvailableActions(actor);
                 actions = filterByPrecondition(actions);
-                Action selection = character.selectAction(actions);
+                Action selection = actor.selectAction(actions);
                 selection.postcondition();
                 history.add(selection);
             }
@@ -83,17 +83,17 @@ public class Engine {
         return checked;
     }
 
-    private List<Action> getAvailableActions(Character character) {
+    private List<Action> getAvailableActions(Actor actor) {
         List<Action> actions = new ArrayList<Action>();
         for (ActionFactory template : actionTemplates) {
             Type[] varTypes = template.argumentVariables();
             if(varTypes.length > 0) {
                 //create actions with all the different combinations of variables that is specified as arguments.
-                for (List<Object> combination : getVariableCombinations(varTypes, character.getLocation())) {
-                    actions.add(template.create(character, worldState, combination));
+                for (List<Object> combination : getVariableCombinations(varTypes, actor.getLocation())) {
+                    actions.add(template.create(actor, worldState, combination));
                 }
             } else { //no args
-                actions.add(template.create(character, worldState, new ArrayList<Object>()));
+                actions.add(template.create(actor, worldState, new ArrayList<Object>()));
             }
         }
         return actions;
@@ -102,7 +102,7 @@ public class Engine {
     private List<List<Object>> getVariableCombinations(Type[] varTypes, Location loc) {
         Object[][] varLists = new Object[varTypes.length][];
         for (int i = 0; i < varTypes.length; i++) {
-            if     (varTypes[i].equals(Character.class))    varLists[i] = activeCharacters();
+            if     (varTypes[i].equals(Actor.class))    varLists[i] = activeCharacters();
             else if(varTypes[i].equals(Location.class))     varLists[i] = connections.get(loc);
             else                                            varLists[i] = worldState.getVariablesOfType(varTypes[i]);
         }
@@ -123,12 +123,12 @@ public class Engine {
         return res;
     }
 
-    private Character[] activeCharacters() {
-        ArrayList<Character> actives = new ArrayList<Character>();
-        for (int i = 0; i < characters.length; i++) {
-            if(characters[i].isActive()) actives.add(characters[i]);
+    private Actor[] activeCharacters() {
+        ArrayList<Actor> actives = new ArrayList<Actor>();
+        for (int i = 0; i < actors.length; i++) {
+            if(actors[i].isActive()) actives.add(actors[i]);
         }
-        return actives.toArray(new Character[actives.size()]);
+        return actives.toArray(new Actor[actives.size()]);
     }
 
 }

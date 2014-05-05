@@ -1,7 +1,7 @@
 package engine;
 import java.util.List;
 
-public abstract class Character {
+public abstract class Actor {
     public abstract Action selectAction(List<Action> actions);
     private Location currentLocation;
     private boolean active = true;
@@ -12,7 +12,7 @@ public abstract class Character {
     public void setLocation(Location currentLocation) {
         this.currentLocation = currentLocation;
     }
-    public Character(String name, Location startLocation) {
+    public Actor(String name, Location startLocation) {
         Name = name;
         currentLocation = startLocation;
     }

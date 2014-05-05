@@ -1,9 +1,7 @@
 package deadgiveaway.actions;
 
-import deadgiveaway.characters.DGACharacter;
 import engine.*;
-import engine.Character;
-import deadgiveaway.characters.Murderer;
+import engine.Actor;
 import deadgiveaway.characters.Victim;
 
 import java.lang.reflect.Type;
@@ -13,8 +11,8 @@ public class ContinueDying extends Action {
 
     @Override
     public boolean precondition() {
-        return character instanceof Victim
-            && ((Victim)character).isBeingKilled;
+        return actor instanceof Victim
+            && ((Victim) actor).isBeingKilled;
     }
 
     @Override
@@ -29,17 +27,17 @@ public class ContinueDying extends Action {
 
     @Override
     public String narrativeDescription() {
-        return character.Name + " falls to the floor and lands in a pool of blood";
+        return actor.Name + " falls to the floor and lands in a pool of blood";
     }
-    private ContinueDying(Character c, WorldState s) {
+    private ContinueDying(Actor c, WorldState s) {
         super(c, s);
     }
 
     public static final ContinueDyingFactory factory = new ContinueDyingFactory();
     public static class ContinueDyingFactory implements ActionFactory {
         @Override
-        public Action create(Character character, WorldState state, List<Object> args) {
-            return new ContinueDying(character, state);
+        public Action create(Actor actor, WorldState state, List<Object> args) {
+            return new ContinueDying(actor, state);
         }
         @Override
         public Type[] argumentVariables() {

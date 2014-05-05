@@ -2,7 +2,6 @@ package deadgiveaway.characters;
 
 import deadgiveaway.actions.MurderPerson;
 import engine.Action;
-import engine.Character;
 import engine.Location;
 import deadgiveaway.ai.RandomAI;
 
