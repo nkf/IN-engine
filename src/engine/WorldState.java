@@ -22,7 +22,12 @@ public class WorldState {
         return typeList.get(t).toArray();
     }
     public <T> void SetVariable(String name, T var) {
-        throw new UnsupportedOperationException();
+        if(variables.containsKey(name) && variables.get(name).getClass() == var.getClass()) {
+            variables.put(name, var);
+        } else {
+            throw new IllegalArgumentException("A variable of type " + var.getClass() +" with name "  + name + " was not declared");
+        }
+
     }
 
     public boolean isGameOver() { return gameOver; }

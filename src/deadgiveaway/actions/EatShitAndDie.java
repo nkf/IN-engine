@@ -16,7 +16,7 @@ public class EatShitAndDie extends Action {
     public boolean precondition() {
         return location == House.toilet
             && actor == Victim.player
-            && !((DGACharacter) actor).isBusy();
+            && !((DGACharacter) actor).isBusy;
     }
 
     @Override

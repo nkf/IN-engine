@@ -25,11 +25,11 @@ public class ContinueMurder extends Action {
         //Kill the victim
         Victim victim = (Victim) target;
         victim.setActive(false);
-        victim.setBusy(false);
+        victim.isBusy = false;
 
         Murderer murderer = (Murderer) actor;
         murderer.murderInProgress = false;
-        murderer.setBusy(false);
+        murderer.isBusy = false;
 
         //Find new character for the player to control, if the victim was the player.
         if(victim == Victim.player) {

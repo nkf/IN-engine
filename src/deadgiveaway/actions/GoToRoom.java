@@ -12,7 +12,7 @@ public class GoToRoom extends Action{
 
     @Override
     public boolean precondition() {
-        return !((DGACharacter) actor).isBusy();
+        return !((DGACharacter) actor).isBusy;
     }
 
     @Override
@@ -49,6 +49,6 @@ public class GoToRoom extends Action{
 
     @Override
     public String toString() {
-        return actor.getName() + " ~ " + locations.get(0) + " -> " + room;
+        return actor.getName() + " ~ " + locations + " -> " + room;
     }
 }
