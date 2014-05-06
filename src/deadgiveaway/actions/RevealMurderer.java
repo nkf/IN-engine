@@ -16,7 +16,8 @@ public class RevealMurderer extends Action{
         return accused instanceof Murderer
             && accused.getLocation() == location
             && ((Murderer)accused).murderInProgress
-            && actor == Victim.player;
+            && actor == Victim.player
+            && !Victim.player.isBeingKilled;
     }
 
     @Override
