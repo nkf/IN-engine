@@ -1,5 +1,6 @@
 package engine;
 
+import deadgiveaway.characters.Victim;
 import engine.util.ListUtil;
 
 import java.lang.reflect.Type;
@@ -61,6 +62,8 @@ public class Engine {
     }
 
     public void start() {
+        System.out.println("You play as "+ Victim.player.getActualName());
+        System.out.println("You are in the "+ Victim.player.getLocation());
         while(!worldState.isGameOver()) {
             for (Actor actor : actors) {
                 if(!actor.isActive()) continue;

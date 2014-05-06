@@ -27,7 +27,7 @@ public class GoToRoom extends Action{
 
     @Override
     public String narrativeDescription() {
-        return actor.Name + " walks from " + location + " into " + room;
+        return actor.getName() + " walks from " + location + " into " + room;
     }
     private GoToRoom(Actor c, WorldState s, Location room) {
         super(c, s);
@@ -49,6 +49,6 @@ public class GoToRoom extends Action{
 
     @Override
     public String toString() {
-        return actor.Name + " ~ " + locations.get(0) + " -> " + room;
+        return actor.getName() + " ~ " + locations.get(0) + " -> " + room;
     }
 }

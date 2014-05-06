@@ -34,7 +34,7 @@ public class EatShitAndDie extends Action {
 
     @Override
     public String narrativeDescription() {
-        return actor.Name + " eats a bit of shit from the toilet and dies";
+        return actor.getName() + " eats a bit of shit from the toilet and dies";
     }
     private EatShitAndDie(Actor c, WorldState s) {
         super(c, s);

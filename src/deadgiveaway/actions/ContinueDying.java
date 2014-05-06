@@ -27,7 +27,7 @@ public class ContinueDying extends Action {
 
     @Override
     public String narrativeDescription() {
-        return actor.Name + " falls to the floor and lands in a pool of blood";
+        return actor.getName() + " falls to the floor and lands in a pool of blood";
     }
     private ContinueDying(Actor c, WorldState s) {
         super(c, s);

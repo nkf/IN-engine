@@ -37,7 +37,7 @@ public class MurderPerson extends Action {
 
     @Override
     public String narrativeDescription() {
-        return actor.Name + " starts murdering " + target.Name + " in front of your very eyes";
+        return actor.getName() + " starts murdering " + target.getName() + " in front of your very eyes";
     }
     private MurderPerson(Actor c, WorldState s, Actor target) {
         super(c, s);

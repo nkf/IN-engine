@@ -48,7 +48,7 @@ public class ContinueMurder extends Action {
 
     @Override
     public String narrativeDescription() {
-        return actor.Name + " stands above the body of " + target.Name + " with a weapon in hand";
+        return actor.getName() + " stands above the body of " + target.getName() + " with a weapon in hand";
     }
     private ContinueMurder(Actor c, WorldState s, Actor target) {
         super(c, s);
