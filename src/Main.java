@@ -12,6 +12,7 @@ public class Main {
     public static void main(String[] args) {
         //See house class for location definitions.
 
+
         //Define characters
         Actor[] actors = new Actor[] {
                 new Victim("Lisa", House.dinnerRoom, false),
@@ -24,7 +25,7 @@ public class Main {
         ActionFactory[] actions = new ActionFactory[] {
                 GoToRoom.factory,
                 EatDinner.factory,
-                EatShitAndDie.factory,
+                //EatShitAndDie.factory,
                 MurderPerson.factory,
                 ContinueMurder.factory,
                 ContinueDying.factory,

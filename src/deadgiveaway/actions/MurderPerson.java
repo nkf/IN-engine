@@ -17,17 +17,17 @@ public class MurderPerson extends Action {
         return actor instanceof Murderer
             && target instanceof Victim
             && target.getLocation() == location
-            && !((DGACharacter) actor).isBusy();
+            && !((DGACharacter) actor).isBusy;
     }
 
     @Override
     public void postcondition() {
         Murderer murderer = (Murderer) actor;
         murderer.murderInProgress = true;
-        murderer.setBusy(true);
+        murderer.isBusy = true;
         Victim victim = (Victim)target;
         victim.isBeingKilled = true;
-        victim.setBusy(true);
+        victim.isBusy = true;
     }
 
     @Override

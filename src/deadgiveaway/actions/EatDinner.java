@@ -12,7 +12,7 @@ public class EatDinner extends Action{
     @Override
     public boolean precondition() {
         return location == House.dinnerRoom
-            && !((DGACharacter) actor).isBusy();
+            && !((DGACharacter) actor).isBusy;
     }
 
     @Override
