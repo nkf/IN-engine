@@ -40,7 +40,7 @@ public class EatDinner extends Action{
             return new EatDinner(actor, state);
         }
         @Override
-        public Type[] argumentVariables() {
+        public Type[] parameterVariables() {
             return new Type[]{ };
         }
     }

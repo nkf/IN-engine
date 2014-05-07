@@ -5,5 +5,5 @@ import java.util.List;
 
 public interface ActionFactory {
     Action create(Actor actor, WorldState state, List<Object> args);
-    Type[] argumentVariables();
+    Type[] parameterVariables();
 }

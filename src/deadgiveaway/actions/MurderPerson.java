@@ -46,12 +46,10 @@ public class MurderPerson extends Action {
 
     public static final MurderPersonFactory factory = new MurderPersonFactory();
     public static class MurderPersonFactory implements ActionFactory {
-        @Override
         public Action create(Actor actor, WorldState state, List<Object> args) {
             return new MurderPerson(actor, state, (Actor)args.get(0));
         }
-        @Override
-        public Type[] argumentVariables() {
+        public Type[] parameterVariables() {
             return new Type[]{ Actor.class };
         }
     }

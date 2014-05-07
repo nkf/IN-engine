@@ -62,7 +62,7 @@ public class ContinueMurder extends Action {
             return new ContinueMurder(actor, state, (Actor)args.get(0));
         }
         @Override
-        public Type[] argumentVariables() {
+        public Type[] parameterVariables() {
             return new Type[]{ Actor.class };
         }
     }

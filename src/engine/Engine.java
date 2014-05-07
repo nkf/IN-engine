@@ -86,7 +86,7 @@ public class Engine {
     private List<Action> getAvailableActions(Actor actor) {
         List<Action> actions = new ArrayList<Action>();
         for (ActionFactory template : actionTemplates) {
-            Type[] varTypes = template.argumentVariables();
+            Type[] varTypes = template.parameterVariables();
             if(varTypes.length > 0) {
                 //create actions with all the different combinations of variables that is specified as arguments.
                 for (List<Object> combination : getVariableCombinations(varTypes, actor.getLocation())) {

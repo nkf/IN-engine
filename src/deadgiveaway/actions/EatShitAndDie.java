@@ -47,7 +47,7 @@ public class EatShitAndDie extends Action {
             return new EatShitAndDie(actor, state);
         }
         @Override
-        public Type[] argumentVariables() {
+        public Type[] parameterVariables() {
             return new Type[]{ };
         }
     }

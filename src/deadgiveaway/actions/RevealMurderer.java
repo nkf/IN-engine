@@ -45,7 +45,7 @@ public class RevealMurderer extends Action{
             return new RevealMurderer(actor, state, (DGACharacter)args.get(0));
         }
         @Override
-        public Type[] argumentVariables() {
+        public Type[] parameterVariables() {
             return new Type[]{ Actor.class };
         }
     }

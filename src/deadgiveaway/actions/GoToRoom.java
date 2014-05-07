@@ -37,12 +37,10 @@ public class GoToRoom extends Action{
 
     public static final GoToRoomFactory factory = new GoToRoomFactory();
     public static class GoToRoomFactory implements ActionFactory {
-        @Override
         public Action create(Actor actor, WorldState state, List<Object> args) {
             return new GoToRoom(actor, state, (Location)args.get(0));
         }
-        @Override
-        public Type[] argumentVariables() {
+        public Type[] parameterVariables() {
             return new Type[]{ Location.class };
         }
     }

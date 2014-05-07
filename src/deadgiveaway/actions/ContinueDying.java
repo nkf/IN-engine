@@ -40,7 +40,7 @@ public class ContinueDying extends Action {
             return new ContinueDying(actor, state);
         }
         @Override
-        public Type[] argumentVariables() {
+        public Type[] parameterVariables() {
             return new Type[]{ };
         }
     }
