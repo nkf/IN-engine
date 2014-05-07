@@ -16,7 +16,8 @@ public class RevealMurderer extends Action{
         return accused instanceof Murderer
             && accused.getLocation() == location
             && ((Murderer)accused).murderInProgress
-            && actor == Victim.player;
+            && actor == Victim.player
+            && !Victim.player.isBeingKilled;
     }
 
     @Override
@@ -26,12 +27,12 @@ public class RevealMurderer extends Action{
 
     @Override
     public String description() {
-        return "Reveal that "+ accused.Name + " is the murderer!";
+        return "Reveal that "+ accused.getName() + " is the murderer!";
     }
 
     @Override
     public String narrativeDescription() {
-        return actor.Name + " reveals that the murderer is " + accused.Name + "!";
+        return actor.getName() + " reveals that the murderer is " + accused.getName() + "!";
     }
     private RevealMurderer(Actor c, WorldState s, DGACharacter accused) {
         super(c, s);

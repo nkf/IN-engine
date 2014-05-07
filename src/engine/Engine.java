@@ -1,5 +1,6 @@
 package engine;
 
+import deadgiveaway.characters.Victim;
 import engine.util.ListUtil;
 
 import java.lang.reflect.Type;

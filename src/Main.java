@@ -36,16 +36,20 @@ public class Main {
         WorldState worldState = new WorldState();
 
         //Fire up the engine
+        System.out.println("You play as "+ Victim.player.getActualName());
+        System.out.println("You are in the "+ Victim.player.getLocation());
+
         final Engine game = new Engine(actors, House.connections, actions, worldState);
         game.addTurnListener(new TurnEvent() {
             public void TurnStarted(Actor actor) {
-                if(actor != Victim.player) return;
+                if (actor != Victim.player) return;
                 List<Action> recap = game.previousTurnRecap(Victim.player);
-                for(Action a : recap) {
+                for (Action a : recap) {
                     System.out.println(a.narrativeDescription());
                 }
             }
         });
         game.start();
+        System.out.println("Game Ended");
     }
 }

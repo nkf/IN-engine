@@ -5,7 +5,12 @@ public abstract class Actor {
     public abstract Action selectAction(List<Action> actions);
     private Location currentLocation;
     private boolean active = true;
-    public final String Name;
+    protected final String Name;
+
+    public String getName() {
+        return Name;
+    }
+
     public Location getLocation() {
         return currentLocation;
     }

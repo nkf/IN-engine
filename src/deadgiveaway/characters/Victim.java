@@ -18,8 +18,6 @@ public class Victim extends DGACharacter {
     private static List<Victim> victims = new ArrayList<Victim>();
     public static Victim player;
 
-
-
     public Victim(String name, Location startLocation, boolean playerControlled) {
         super(name, startLocation);
         this.playerControl = playerControlled;
@@ -33,10 +31,15 @@ public class Victim extends DGACharacter {
         return null;
     }
     public void setPlayerControlled() {
-        if(player != null) player.playerControl = false;
+        // Print actual name before switching control
+        System.out.println("You now control " + getName());
+        System.out.println("You are in the "+ getLocation());
+
+        // Remove control from old player to this one
+        if(player != null)
+            player.playerControl = false;
         playerControl = true;
         player = this;
-        System.out.println("You now control " + Name);
     }
     @Override
     public Action selectAction(List<Action> actions) {
