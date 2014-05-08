@@ -29,7 +29,8 @@ public class Main {
                 MurderPerson.factory,
                 ContinueMurder.factory,
                 ContinueDying.factory,
-                RevealMurderer.factory
+                RevealMurderer.factory,
+                KnockOutPerson.factory
         };
 
         //Define initial worldstate

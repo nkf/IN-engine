@@ -18,7 +18,7 @@ public class WorldState {
         }
         variables.put(name, var);
     }
-    public Object[] getVariablesOfType(Type t) {
+    Object[] getVariablesOfType(Type t) {
         return typeList.get(t).toArray();
     }
     public <T> void SetVariable(String name, T var) {
@@ -29,6 +29,7 @@ public class WorldState {
         }
 
     }
+    public Object get(String name) { return variables.get(name); }
 
     public boolean isGameOver() { return gameOver; }
     public void setGameOver() { this.gameOver = true; }
