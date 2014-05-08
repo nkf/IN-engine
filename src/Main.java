@@ -31,12 +31,16 @@ public class Main {
                 ContinueMurder.factory,
                 ContinueDying.factory,
                 RevealMurderer.factory,
-                KnockOutPerson.factory
+                KnockOutPerson.factory,
+                PickUp.factory
         };
 
         //Define initial worldstate
         WorldState worldState = new WorldState();
         worldState.addVariable("MurderScenesVisited", 0);
+
+        worldState.addVariable("testKnife", new Item("Knife of batshit insane slaying", ItemType.MURDER_WEAPON, House.kitchen));
+
 
         //Fire up the engine
         System.out.println("You play as "+ Victim.player.getActualName());
@@ -48,7 +52,10 @@ public class Main {
                 if (actor != Victim.player) return;
                 List<Action> recap = game.previousTurnRecap(Victim.player);
                 for (Action a : recap) {
-                    System.out.println(a.narrativeDescription());
+                    if (a.actor.equals((Victim.player)))
+                        System.out.println(a.effectDescription());
+                    else
+                        System.out.println(a.narrativeDescription());
                 }
             }
         });

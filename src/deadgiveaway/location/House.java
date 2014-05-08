@@ -1,5 +1,7 @@
 package deadgiveaway.location;
 
+import engine.Item;
+import engine.ItemType;
 import engine.Location;
 
 import java.util.HashMap;
@@ -12,6 +14,7 @@ public class House {
     public static final Location kitchen =      new Room("the kitchen");
     public static final Location basement =     new Room("the basement");
     public static final HashMap<Location,Location[]> connections = new HashMap<Location, Location[]>();
+
     static {
         connections.put(dinnerRoom, new Location[]{ hall, bedroom, kitchen });
         connections.put(toilet,     new Location[]{ hall });

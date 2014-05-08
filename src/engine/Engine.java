@@ -42,7 +42,7 @@ public class Engine {
         if(turnIndex < 0) return recap;
         for (; turnIndex < history.size(); turnIndex++) {
             Action a = history.get(turnIndex);
-            if(a.locations.contains(pov.getLocation()) && a.actor != pov) {
+            if(a.locations.contains(pov.getLocation()) /*&& a.actor != pov*/) {
                 recap.add(a);
             }
         }

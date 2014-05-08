@@ -14,10 +14,16 @@ public class MurderPerson extends Action {
 
     @Override
     public boolean precondition() {
+        boolean hasMurderweapon = false;
+        for (int i = 0; i < actor.items.size(); i++)
+            if (actor.items.get(i).type == ItemType.MURDER_WEAPON) // Note: Doesn't handle multiple murder weapons
+                hasMurderweapon = true;
+
         return actor instanceof Murderer
             && target instanceof Victim
             && target.getLocation() == location
-            && !((DGACharacter) actor).isBusy;
+            && !((DGACharacter) actor).isBusy
+            && hasMurderweapon;
     }
 
     @Override

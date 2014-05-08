@@ -1,4 +1,5 @@
 package engine;
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Actor {
@@ -6,6 +7,8 @@ public abstract class Actor {
     private Location currentLocation;
     private boolean active = true;
     protected final String Name;
+
+    public final List<Item> items;
 
     public String getName() {
         return Name;
@@ -20,6 +23,7 @@ public abstract class Actor {
     public Actor(String name, Location startLocation) {
         Name = name;
         currentLocation = startLocation;
+        items = new ArrayList<Item>();
     }
 
     @Override

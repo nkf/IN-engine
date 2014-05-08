@@ -33,7 +33,15 @@ public class GoToRoom extends Action{
 
     @Override
     public String effectDescription() {
-        return room.description();
+        StringBuilder result = new StringBuilder("You are in "+room.Name);
+
+        if(room.items.size() > 0)
+            result.append("\nIn here, there is ");
+
+        for (int i = 0; i < room.items.size(); i++)
+            result.append("\n"+room.items.get(i).name);
+
+        return result.toString();
     }
 
     private GoToRoom(Actor c, WorldState s, Room room) {
