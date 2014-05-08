@@ -4,8 +4,8 @@ import java.lang.reflect.Type;
 import java.util.*;
 
 public class WorldState {
-    private HashMap<String, Object> variables;
-    private HashMap<Type, List<Object>> typeList;
+    private HashMap<String, Object> variables = new HashMap<String, Object>();
+    private HashMap<Type, List<Object>> typeList = new HashMap<Type, List<Object>>();
     private boolean gameOver = false;
 
     public <T> void addVariable(String name, T var) {

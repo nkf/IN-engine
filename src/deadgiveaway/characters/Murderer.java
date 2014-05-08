@@ -11,8 +11,8 @@ public class Murderer extends DGACharacter {
     private RandomAI ai = new RandomAI();
     public boolean murderInProgress = false;
 
-    public Murderer(String name, Location startLocation) {
-        super(name, startLocation);
+    public Murderer(String name, Location startLocation, Sex sex) {
+        super(name, startLocation, sex);
     }
 
     @Override

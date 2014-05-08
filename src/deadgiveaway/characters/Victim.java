@@ -18,8 +18,8 @@ public class Victim extends DGACharacter {
     private static List<Victim> victims = new ArrayList<Victim>();
     public static Victim player;
 
-    public Victim(String name, Location startLocation, boolean playerControlled) {
-        super(name, startLocation);
+    public Victim(String name, Location startLocation, Sex sex, boolean playerControlled) {
+        super(name, startLocation, sex);
         this.playerControl = playerControlled;
         if(playerControlled) player = this;
         victims.add(this);

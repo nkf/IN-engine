@@ -1,4 +1,5 @@
 import deadgiveaway.actions.*;
+import deadgiveaway.characters.DGACharacter;
 import deadgiveaway.location.House;
 import engine.*;
 import engine.Actor;
@@ -15,10 +16,10 @@ public class Main {
 
         //Define characters
         Actor[] actors = new Actor[] {
-                new Victim("Lisa", House.dinnerRoom, false),
-                new Victim("Peter", House.dinnerRoom, false),
-                new Victim("Jack", House.dinnerRoom, true),
-                new Murderer("Mike", House.dinnerRoom)
+                new Victim("Lisa", House.dinnerRoom, DGACharacter.Sex.Female, false),
+                new Victim("Peter", House.dinnerRoom, DGACharacter.Sex.Male, false),
+                new Victim("Jack", House.dinnerRoom, DGACharacter.Sex.Male, true),
+                new Murderer("Mike", House.dinnerRoom, DGACharacter.Sex.Male)
         };
 
         //Define action actions
@@ -35,10 +36,11 @@ public class Main {
 
         //Define initial worldstate
         WorldState worldState = new WorldState();
+        worldState.addVariable("MurderScenesVisited", 0);
 
         //Fire up the engine
         System.out.println("You play as "+ Victim.player.getActualName());
-        System.out.println("You are in the "+ Victim.player.getLocation());
+        System.out.println("You are in "+ Victim.player.getLocation());
 
         final Engine game = new Engine(actors, House.connections, actions, worldState);
         game.addTurnListener(new TurnEvent() {
