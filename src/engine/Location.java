@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Location {
-    public final String     Name;
-    public final List<Item> items;
+    public final String name;
+    public final List<Actor> actors;
 
     public Location(String name) {
-        Name = name;
-        items = new ArrayList<Item>();
+        this.name = name;
+        actors = new ArrayList<Actor>();
     }
 
     @Override
     public String toString() {
-        return Name;
+        return name;
     }
 }

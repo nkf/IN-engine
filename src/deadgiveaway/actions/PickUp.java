@@ -1,6 +1,9 @@
 package deadgiveaway.actions;
 
+import deadgiveaway.characters.DGACharacter;
 import deadgiveaway.characters.Murderer;
+import deadgiveaway.items.Item;
+import deadgiveaway.items.ItemType;
 import engine.*;
 
 import java.lang.reflect.Type;
@@ -15,15 +18,16 @@ public class PickUp extends Action {
 
     @Override
     public boolean precondition() {
-        return actor.getLocation().equals(item.getLocation()) // Actor and Item must be in same location
-                && actor instanceof Murderer;
+        return actor.getLocation().equals(item.getRoom()) // Actor and Item must be in same room
+            && actor instanceof Murderer
+            && item.type == ItemType.MURDER_WEAPON;
     }
 
     @Override
     public void postcondition() {
-        item.setLocation(null);
+        item.setRoom(null);
 
-        actor.items.add(item);
+        ((DGACharacter)actor).items.add(item);
     }
 
     @Override

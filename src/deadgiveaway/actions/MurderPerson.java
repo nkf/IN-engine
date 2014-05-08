@@ -1,6 +1,7 @@
 package deadgiveaway.actions;
 
 import deadgiveaway.characters.DGACharacter;
+import deadgiveaway.items.ItemType;
 import engine.*;
 import engine.Actor;
 import deadgiveaway.characters.Murderer;
@@ -14,16 +15,11 @@ public class MurderPerson extends Action {
 
     @Override
     public boolean precondition() {
-        boolean hasMurderweapon = false;
-        for (int i = 0; i < actor.items.size(); i++)
-            if (actor.items.get(i).type == ItemType.MURDER_WEAPON) // Note: Doesn't handle multiple murder weapons
-                hasMurderweapon = true;
-
         return actor instanceof Murderer
             && target instanceof Victim
             && target.getLocation() == location
             && !((DGACharacter) actor).isBusy
-            && hasMurderweapon;
+            && ((Murderer)actor).hasMurderWeapon();
     }
 
     @Override
@@ -43,7 +39,8 @@ public class MurderPerson extends Action {
 
     @Override
     public String narrativeDescription() {
-        return actor.getName() + " starts murdering " + target.getName() + " in front of your very eyes";
+        if(target == Victim.player) return "You feel an immense pain, as someone strikes you down from behind";
+        else                        return actor.getName() + " starts murdering " + target.getName() + " in front of your very eyes";
     }
 
     @Override

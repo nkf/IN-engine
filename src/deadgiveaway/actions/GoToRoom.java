@@ -1,6 +1,7 @@
 package deadgiveaway.actions;
 
 import deadgiveaway.characters.DGACharacter;
+import deadgiveaway.items.ItemType;
 import deadgiveaway.location.Room;
 import engine.*;
 import engine.Actor;
@@ -23,7 +24,7 @@ public class GoToRoom extends Action{
 
     @Override
     public String description() {
-        return "Go to " + room.Name;
+        return "Go to " + room.name;
     }
 
     @Override
@@ -33,13 +34,16 @@ public class GoToRoom extends Action{
 
     @Override
     public String effectDescription() {
-        StringBuilder result = new StringBuilder("You are in "+room.Name);
+        StringBuilder result = new StringBuilder("You are in "+room.name);
 
         if(room.items.size() > 0)
             result.append("\nIn here, there is ");
 
-        for (int i = 0; i < room.items.size(); i++)
-            result.append("\n"+room.items.get(i).name);
+        for (int i = 0; i < room.items.size(); i++) {
+            if(room.items.get(i).type == ItemType.BODY) result.append("A dead body on the floor");
+            else result.append("\n"+room.items.get(i).name);
+        }
+
 
         return result.toString();
     }

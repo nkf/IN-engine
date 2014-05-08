@@ -2,21 +2,22 @@ package deadgiveaway.actions;
 
 import deadgiveaway.characters.DGACharacter;
 import deadgiveaway.characters.Victim;
-import engine.Action;
-import engine.ActionFactory;
-import engine.Actor;
-import engine.WorldState;
+import deadgiveaway.items.Item;
+import engine.*;
 
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Set;
 
 public class KnockOutPerson extends Action {
     private DGACharacter target;
     @Override
     public boolean precondition() {
         return actor == Victim.player
-            && (Integer)state.get("MurderScenesVisited") > 0
-            && !((DGACharacter)actor).isBusy;
+            && ((Set<Item>)state.get("BodiesInvestigated")).size() > 0
+            && !((DGACharacter)actor).isBusy
+            && target.getLocation() == location
+            && target != actor;
     }
 
     @Override

@@ -1,18 +1,16 @@
 package deadgiveaway.location;
 
-import engine.Item;
-import engine.ItemType;
 import engine.Location;
 
 import java.util.HashMap;
 
 public class House {
-    public static final Location dinnerRoom =   new Room("the dinner room");
-    public static final Location toilet =       new Room("the toilet");
-    public static final Location bedroom =      new Room("the bedroom");
-    public static final Location hall =         new Room("the hall");
-    public static final Location kitchen =      new Room("the kitchen");
-    public static final Location basement =     new Room("the basement");
+    public static final Room dinnerRoom =   new Room("the dinner room");
+    public static final Room toilet =       new Room("the toilet");
+    public static final Room bedroom =      new Room("the bedroom");
+    public static final Room hall =         new Room("the hall");
+    public static final Room kitchen =      new Room("the kitchen");
+    public static final Room basement =     new Room("the basement");
     public static final HashMap<Location,Location[]> connections = new HashMap<Location, Location[]>();
 
     static {

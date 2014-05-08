@@ -1,6 +1,5 @@
 package engine;
 
-import deadgiveaway.characters.Victim;
 import engine.util.ListUtil;
 
 import java.lang.reflect.Type;
@@ -42,7 +41,7 @@ public class Engine {
         if(turnIndex < 0) return recap;
         for (; turnIndex < history.size(); turnIndex++) {
             Action a = history.get(turnIndex);
-            if(a.locations.contains(pov.getLocation()) /*&& a.actor != pov*/) {
+            if(a.locations.contains(pov.getLocation())) {
                 recap.add(a);
             }
         }
@@ -103,7 +102,7 @@ public class Engine {
     private List<List<Object>> getVariableCombinations(Type[] varTypes, Location loc) {
         Object[][] varLists = new Object[varTypes.length][];
         for (int i = 0; i < varTypes.length; i++) {
-            if     (varTypes[i].equals(Actor.class))    varLists[i] = activeCharacters();
+            if     (varTypes[i].equals(Actor.class))        varLists[i] = activeCharacters();
             else if(varTypes[i].equals(Location.class))     varLists[i] = connections.get(loc);
             else                                            varLists[i] = worldState.getVariablesOfType(varTypes[i]);
         }
@@ -111,7 +110,8 @@ public class Engine {
             List<Object> col = Arrays.asList(varLists[0]);
             return wrapObjects(col);
         }
-        return ListUtil.cartesianProduct(varLists);
+        List<List<Object>> res = ListUtil.cartesianProduct(varLists);
+        return res;
     }
 
     private List<List<Object>> wrapObjects(List<Object> objects) {
