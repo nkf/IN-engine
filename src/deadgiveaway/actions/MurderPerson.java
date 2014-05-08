@@ -39,6 +39,12 @@ public class MurderPerson extends Action {
     public String narrativeDescription() {
         return actor.getName() + " starts murdering " + target.getName() + " in front of your very eyes";
     }
+
+    @Override
+    public String effectDescription() {
+        return "";
+    }
+
     private MurderPerson(Actor c, WorldState s, Actor target) {
         super(c, s);
         this.target = (DGACharacter)target;

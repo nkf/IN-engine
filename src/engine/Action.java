@@ -9,6 +9,7 @@ public abstract class Action {
     public abstract void postcondition();
     public abstract String description();
     public abstract String narrativeDescription();
+    public abstract String effectDescription();
     public final Actor actor;
     public final List<Location> locations;
     public final Location location;

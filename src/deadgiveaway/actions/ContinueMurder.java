@@ -31,6 +31,7 @@ public class ContinueMurder extends Action {
         murderer.murderInProgress = false;
         murderer.isBusy = false;
 
+
         //Find new character for the player to control, if the victim was the player.
         if(victim == Victim.player) {
             Victim activeNonPlayer = Victim.getActiveNonPlayer();
@@ -50,6 +51,12 @@ public class ContinueMurder extends Action {
     public String narrativeDescription() {
         return actor.getName() + " stands above the body of " + target.getName() + " with a weapon in hand";
     }
+
+    @Override
+    public String effectDescription() {
+        return "";
+    }
+
     private ContinueMurder(Actor c, WorldState s, Actor target) {
         super(c, s);
         this.target = (DGACharacter)target;

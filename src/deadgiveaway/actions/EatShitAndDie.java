@@ -36,6 +36,12 @@ public class EatShitAndDie extends Action {
     public String narrativeDescription() {
         return actor.getName() + " eats a bit of shit from the toilet and dies";
     }
+
+    @Override
+    public String effectDescription() {
+        return "You die from the agony of eating excrement";
+    }
+
     private EatShitAndDie(Actor c, WorldState s) {
         super(c, s);
     }

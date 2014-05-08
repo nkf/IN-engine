@@ -34,6 +34,12 @@ public class RevealMurderer extends Action{
     public String narrativeDescription() {
         return actor.getName() + " reveals that the murderer is " + accused.getName() + "!";
     }
+
+    @Override
+    public String effectDescription() {
+        return "You reveal " + accused + " to be the murderer! Thus solving this murder mystery";
+    }
+
     private RevealMurderer(Actor c, WorldState s, DGACharacter accused) {
         super(c, s);
         this.accused = accused;

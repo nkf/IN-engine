@@ -1,6 +1,7 @@
 package deadgiveaway.actions;
 
 import deadgiveaway.characters.DGACharacter;
+import deadgiveaway.location.Room;
 import engine.*;
 import engine.Actor;
 
@@ -8,7 +9,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 public class GoToRoom extends Action{
-    private Location room;
+    private Room room;
 
     @Override
     public boolean precondition() {
@@ -29,7 +30,13 @@ public class GoToRoom extends Action{
     public String narrativeDescription() {
         return actor.getName() + " walks from " + location + " into " + room;
     }
-    private GoToRoom(Actor c, WorldState s, Location room) {
+
+    @Override
+    public String effectDescription() {
+        return room.description();
+    }
+
+    private GoToRoom(Actor c, WorldState s, Room room) {
         super(c, s);
         this.room = room;
         locations.add(room);
@@ -38,7 +45,7 @@ public class GoToRoom extends Action{
     public static final GoToRoomFactory factory = new GoToRoomFactory();
     public static class GoToRoomFactory implements ActionFactory {
         public Action create(Actor actor, WorldState state, List<Object> args) {
-            return new GoToRoom(actor, state, (Location)args.get(0));
+            return new GoToRoom(actor, state, (Room)args.get(0));
         }
         public Type[] parameterVariables() {
             return new Type[]{ Location.class };

@@ -5,12 +5,12 @@ import engine.Location;
 import java.util.HashMap;
 
 public class House {
-    public static final Location dinnerRoom = new Location("the dinner room");
-    public static final Location toilet = new Location("the toilet");
-    public static final Location bedroom = new Location("the bedroom");
-    public static final Location hall = new Location("the hall");
-    public static final Location kitchen = new Location("the kitchen");
-    public static final Location basement = new Location("the basement");
+    public static final Location dinnerRoom =   new Room("the dinner room");
+    public static final Location toilet =       new Room("the toilet");
+    public static final Location bedroom =      new Room("the bedroom");
+    public static final Location hall =         new Room("the hall");
+    public static final Location kitchen =      new Room("the kitchen");
+    public static final Location basement =     new Room("the basement");
     public static final HashMap<Location,Location[]> connections = new HashMap<Location, Location[]>();
     static {
         connections.put(dinnerRoom, new Location[]{ hall, bedroom, kitchen });

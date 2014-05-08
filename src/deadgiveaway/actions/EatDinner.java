@@ -29,6 +29,12 @@ public class EatDinner extends Action{
     public String narrativeDescription() {
         return actor.getName() + " eats a bit of dinner at the table";
     }
+
+    @Override
+    public String effectDescription() {
+        return "You eat some food at the table";
+    }
+
     private EatDinner(Actor c, WorldState s) {
         super(c, s);
     }
