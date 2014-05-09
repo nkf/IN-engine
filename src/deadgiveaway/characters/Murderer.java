@@ -34,6 +34,16 @@ public class Murderer extends DGACharacter {
     }
     */
     /*
+    //Prioritize MurderPerson
+    @Override
+    public Action selectAction(List<Action> actions) {
+        for (Action a : actions) {
+            if(a instanceof MurderPerson) return a;
+        }
+        return actions.get( ai.getIndex(actions.size()) );
+    }
+    */
+    /*
     //Prioritize MurderPerson - Pickup
     @Override
     public Action selectAction(List<Action> actions) {
