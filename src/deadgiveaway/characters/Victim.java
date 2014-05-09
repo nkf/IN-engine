@@ -34,8 +34,7 @@ public class Victim extends DGACharacter {
 
     public void setPlayerControlled() {
         // Print actual name before switching control
-        System.out.println("You now control " + getName());
-        System.out.println("You are in the " + getLocation());
+        System.out.println("You now control " + getActualName());
 
         // Remove control from old player to this one
         if (player != null)

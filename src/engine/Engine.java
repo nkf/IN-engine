@@ -61,12 +61,13 @@ public class Engine {
     }
 
     public void start() {
-        while(!worldState.isGameOver()) {
+        while(!worldState.gameIsOver()) {
             for (Actor actor : actors) {
-                if(!actor.isActive()) continue;
+                if(!actor.isActive() || worldState.gameIsOver()) continue;
                 turnStartedEvent(actor);
                 List<Action> actions = getAvailableActions(actor);
                 actions = filterByPrecondition(actions);
+                if(actions.isEmpty()) continue;
                 Action selection = actor.selectAction(actions);
                 selection.postcondition();
                 history.add(selection);

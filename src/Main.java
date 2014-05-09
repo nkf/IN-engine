@@ -44,6 +44,7 @@ public class Main {
         //Define initial worldstate
         WorldState worldState = new WorldState();
         worldState.addVariable("BodiesInvestigated", new HashSet<Item>());
+        worldState.addVariable("KnockedOutCharacters", new HashSet<DGACharacter>());
 
         worldState.addVariable("Knife", new Item("a knife", ItemType.MURDER_WEAPON, House.kitchen));
         worldState.addVariable("Wrench", new Item("a wrench", ItemType.MURDER_WEAPON, House.basement));
@@ -59,16 +60,21 @@ public class Main {
         game.addTurnListener(new TurnEvent() {
             public void TurnStarted(Actor actor) {
                 if (actor != Victim.player) return;
-                List<Action> recap = game.previousTurnRecap(Victim.player);
-                for (Action a : recap) {
-                    if (a.actor.equals((Victim.player)))
-                        System.out.println(a.effectDescription());
-                    else
-                        System.out.println(a.narrativeDescription());
-                }
+                PrintTurn(game);
             }
         });
         game.start();
-        System.out.println("Game Ended");
+        PrintTurn(game);
+        System.out.println("Game Over");
+    }
+    private static void PrintTurn(Engine game) {
+        List<Action> recap = game.previousTurnRecap(Victim.player);
+        for (Action a : recap) {
+            if (a.actor.equals((Victim.player)))
+                System.out.println(a.effectDescription());
+            else
+                System.out.println(a.narrativeDescription());
+        }
     }
 }
+

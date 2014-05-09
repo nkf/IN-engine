@@ -31,6 +31,6 @@ public class WorldState {
     }
     public Object get(String name) { return variables.get(name); }
 
-    public boolean isGameOver() { return gameOver; }
+    public boolean gameIsOver() { return gameOver; }
     public void setGameOver() { this.gameOver = true; }
 }

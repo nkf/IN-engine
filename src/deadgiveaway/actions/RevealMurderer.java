@@ -37,7 +37,7 @@ public class RevealMurderer extends Action{
 
     @Override
     public String effectDescription() {
-        return "You reveal " + accused + " to be the murderer! Thus solving this murder mystery";
+        return "You reveal " + accused.getName() + " to be the murderer! Thus solving the murder mystery!";
     }
 
     private RevealMurderer(Actor c, WorldState s, DGACharacter accused) {

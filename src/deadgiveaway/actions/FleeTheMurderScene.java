@@ -33,7 +33,7 @@ public class FleeTheMurderScene extends Action {
         victim.setActive(false);
         victim.isBusy = false;
         //Add a body to the scene
-        Item body = new Item(victim.getActualName(), ItemType.BODY, (Room)location, murderer.items.remove(0));
+        Item body = new Item(victim.getActualName(), ItemType.BODY, (Room)location, new Item("fists",ItemType.MURDER_WEAPON,null)/*murderer.items.remove(0)*/);
         state.addVariable("BodyOf"+victim.getActualName(), body);
 
         murderer.murderInProgress = false;

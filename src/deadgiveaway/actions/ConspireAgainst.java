@@ -22,6 +22,7 @@ public class ConspireAgainst extends Action{
             && with != actor
             && with.getLocation() == location
             && actor == Victim.player
+            && !with.isBusy
             && ((Set<Item>)state.get("BodiesInvestigated")).size() > 0;
     }
 

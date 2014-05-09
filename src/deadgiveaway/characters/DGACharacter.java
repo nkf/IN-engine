@@ -11,8 +11,7 @@ public abstract class DGACharacter extends Actor {
     public DGACharacter(String name, Location startLocation, Sex sex) {
         super(name, startLocation);
         items = new ArrayList<Item>();
-        if   (sex == Sex.Female)  this.sex = "Her";
-        else this.sex = "Him";
+        this.sex = sex;
     }
     public final List<Item> items;
 
@@ -20,7 +19,7 @@ public abstract class DGACharacter extends Actor {
         Male, Female
     }
     public boolean isBusy = false;
-    public final String sex;
+    public final Sex sex;
     @Override
     public String getName() {
         if (Victim.player.equals(this))
