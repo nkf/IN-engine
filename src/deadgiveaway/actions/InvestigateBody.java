@@ -1,5 +1,6 @@
 package deadgiveaway.actions;
 
+import deadgiveaway.characters.DGACharacter;
 import deadgiveaway.characters.Victim;
 import deadgiveaway.items.Item;
 import deadgiveaway.items.ItemType;
@@ -17,6 +18,7 @@ public class InvestigateBody extends Action {
     public boolean precondition() {
         return ((Room)location).items.contains(body)
             && actor == Victim.player
+            && !((DGACharacter)actor).isBusy
             && body.type == ItemType.BODY;
     }
 

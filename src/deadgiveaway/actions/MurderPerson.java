@@ -18,8 +18,8 @@ public class MurderPerson extends Action {
         return actor instanceof Murderer
             && target instanceof Victim
             && target.getLocation() == location
-            && !((DGACharacter) actor).isBusy;
-//            && ((Murderer)actor).hasMurderWeapon();
+            && !((DGACharacter) actor).isBusy
+            && ((Murderer)actor).hasMurderWeapon();
     }
 
     @Override

@@ -8,6 +8,7 @@ import engine.Actor;
 import deadgiveaway.characters.Murderer;
 import deadgiveaway.characters.Victim;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -15,15 +16,17 @@ public class Main {
 
     public static void main(String[] args) {
         //See house class for location definitions.
-
-
+        
         //Define characters
-        Actor[] actors = new Actor[] {
-                new Victim("Lisa", House.dinnerRoom, DGACharacter.Sex.Female, false),
-                new Victim("Peter", House.dinnerRoom, DGACharacter.Sex.Male, false),
-                new Victim("Jack", House.dinnerRoom, DGACharacter.Sex.Male, true),
-                new Murderer("Mike", House.dinnerRoom, DGACharacter.Sex.Male)
-        };
+        Actor[] actors = new Actor[4];
+        int murderIndex = House.rng.nextInt(actors.length);
+        int playerIndex = House.rng.nextInt(actors.length);
+        while(playerIndex == murderIndex) playerIndex = House.rng.nextInt(actors.length); //ensure that they are not the same...
+        for (int i = 0; i < actors.length; i++) {
+            House.Person p = House.GetRandomPerson();
+            if(i == murderIndex) actors[i] = new Murderer(p.name,House.dinnerRoom,p.sex);
+            else                 actors[i] = new Victim(p.name, House.dinnerRoom, p.sex, i == playerIndex);
+        }
 
         //Define action actions
         ActionFactory[] actions = new ActionFactory[] {
@@ -76,5 +79,6 @@ public class Main {
                 System.out.println(a.narrativeDescription());
         }
     }
+
 }
 

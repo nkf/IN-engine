@@ -27,7 +27,7 @@ public class Victim extends DGACharacter {
 
     public static Victim getActiveNonPlayer() {
         for (Victim v : victims) {
-            if (v != player && v.isActive()) return v;
+            if (v != player && v.isActive() && !v.isBusy) return v;
         }
         return null;
     }

@@ -22,7 +22,7 @@ public class Murderer extends DGACharacter {
             if (items.get(i).type == ItemType.MURDER_WEAPON) return true;
         return false;
     }
-//    /*
+    /*
     //Random actions
     @Override
     public Action selectAction(List<Action> actions) {
@@ -50,7 +50,7 @@ public class Murderer extends DGACharacter {
         return actions.get( ai.getIndex(actions.size()) );
     }
     */
-    /*
+//    /*
     //Prioritize MurderPerson when alone with the person - Pickup
     @Override
     public Action selectAction(List<Action> actions) {
@@ -62,5 +62,5 @@ public class Murderer extends DGACharacter {
         }
         return nonSuspect.get( ai.getIndex( nonSuspect.size()) );
     }
-    */
+//    */
 }
