@@ -32,7 +32,6 @@ public class Main {
         ActionFactory[] actions = new ActionFactory[] {
                 GoToRoom.factory,
                 EatDinner.factory,
-                //EatShitAndDie.factory,
                 MurderPerson.factory,
                 FleeTheMurderScene.factory,
                 ContinueDying.factory,
